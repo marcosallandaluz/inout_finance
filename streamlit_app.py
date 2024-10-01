@@ -42,8 +42,11 @@ def delete_transaction(transaction_id):
 
 # Função para calcular o resumo financeiro
 def get_summary(df):
-    # Garantir que a coluna 'type' esteja sem espaços e com a capitalização correta
+    # Garantir que a coluna 'type' esteja sem espaços e normalizar a capitalização
     df['type'] = df['type'].str.strip().str.lower()  # Remove espaços e converte para minúsculas
+    
+    # Tratar variações de 'saida' e 'saída' (com e sem acento)
+    df['type'] = df['type'].replace({'saída': 'saida'})
     
     # Converter a coluna 'amount' para numérico para garantir que está sendo somado corretamente
     df['amount'] = pd.to_numeric(df['amount'], errors='coerce')

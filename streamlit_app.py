@@ -3,19 +3,6 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import sqlite3
 
-# Função para criar a tabela no banco de dados SQLite
-def create_table():
-    conn = sqlite3.connect('finances.db')
-    c = conn.cursor()
-    c.execute('''CREATE TABLE IF NOT EXISTS transactions
-                 (id INTEGER PRIMARY KEY AUTOINCREMENT,
-                  type TEXT,
-                  month TEXT,
-                  amount REAL,
-                  description TEXT)''')
-    conn.commit()
-    conn.close()
-
 # Função para adicionar uma transação
 def add_transaction(transaction_type, month, amount, description):
     conn = sqlite3.connect('finances.db')

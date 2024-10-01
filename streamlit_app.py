@@ -40,7 +40,6 @@ def delete_transaction(transaction_id):
     conn.commit()
     conn.close()
 
-
 # Função para calcular o resumo financeiro
 def get_summary(df):
     # Garantir que a coluna 'type' esteja sem espaços e com a capitalização correta
@@ -49,13 +48,17 @@ def get_summary(df):
     # Converter a coluna 'amount' para numérico para garantir que está sendo somado corretamente
     df['amount'] = pd.to_numeric(df['amount'], errors='coerce')
     
-    # Somar corretamente as entradas e saídas, independentemente do campo 'month'
+    # Filtrar todas as transações de 'entrada' e 'saida', independentemente do campo 'month'
     total_entrada = df[df['type'] == 'entrada']['amount'].sum()
     total_saida = df[df['type'] == 'saida']['amount'].sum()
+
+    # Garantir que todos os valores de 'total_saida' são numericamente válidos
+    if pd.isnull(total_saida):
+        total_saida = 0
     
     saldo = total_entrada - total_saida
     
-    # Print para debug, você pode remover depois
+    # Print para debug (remova depois)
     print(f"Total de Entradas: {total_entrada}, Total de Saídas: {total_saida}, Saldo: {saldo}")
     
     return total_entrada, total_saida, saldo

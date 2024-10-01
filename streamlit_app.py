@@ -32,6 +32,15 @@ def get_transactions():
     conn.close()
     return df
 
+# Função para excluir uma transação
+def delete_transaction(transaction_id):
+    conn = sqlite3.connect('finances.db')
+    c = conn.cursor()
+    c.execute("DELETE FROM transactions WHERE id = ?", (transaction_id,))
+    conn.commit()
+    conn.close()
+
+
 # Função para calcular o resumo financeiro
 def get_summary(df):
     # Garantir que a coluna 'type' esteja sem espaços e com a capitalização correta

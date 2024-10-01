@@ -7,4 +7,4 @@
 
 ### Obs
 
-- Scheema do banco está no codigo.
+- Scheema do banco está no codigo createdb.py.

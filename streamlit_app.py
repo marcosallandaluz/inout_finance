@@ -66,9 +66,6 @@ def create_chart(total_entrada, total_saida, saldo):
         ax.text(i, v, f'R$ {v:.2f}', ha='center', va='bottom')
     return fig
 
-# Criar a tabela no banco de dados
-create_table()
-
 # Título principal
 st.title("Controle Pix")
 
